@@ -1,0 +1,379 @@
+/* ============================================================
+   MMI Portfolio — Global Styles v2
+   Direction : Editorial froid / Blue-electric / Glacial
+   Palette   : blanc pur, bleus profonds, cyan, violet
+   Updated   : palette froide appliquée
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap');
+
+/* ── Variables ──────────────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --bg:          #ffffff;
+  --bg-card:     #f4f6fb;      /* légèrement bleuté */
+  --bg-elevated: #eaecf4;
+
+  /* Bordures — teinte froide */
+  --border:       rgba(60, 80, 160, 0.10);
+  --border-hover: rgba(60, 80, 160, 0.28);
+
+  /* Textes */
+  --text-primary:   #0c0e1a;
+  --text-secondary: #424568;
+  --text-muted:     #8e91b0;
+
+  /* ── Palette froide ── */
+  --accent:        #2563eb;    /* bleu électrique principal */
+  --accent-bright: #3b82f6;    /* bleu vif hover */
+  --accent-cyan:   #06b6d4;    /* cyan vif */
+  --accent-violet: #7c3aed;    /* violet froid */
+  --accent-alt:    #e11d48;    /* rouge froid pour erreurs */
+  --accent-blue:   #0ea5e9;    /* sky blue */
+  --accent-green:  #10b981;    /* confirmation */
+
+  /* Gradients d'accent */
+  --grad-primary:  linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
+  --grad-violet:   linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
+  --grad-cold:     linear-gradient(135deg, #0ea5e9 0%, #7c3aed 100%);
+
+  /* Typographies */
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+  --font-mono:    'DM Mono', monospace;
+
+  /* Formes */
+  --radius:    10px;
+  --radius-lg: 20px;
+  --transition: 240ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Ombres froides */
+  --shadow-sm: 0 1px 3px rgba(37, 99, 235, 0.07), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 16px rgba(37, 99, 235, 0.10), 0 2px 6px rgba(0,0,0,0.04);
+  --shadow-lg: 0 12px 40px rgba(37, 99, 235, 0.14), 0 4px 12px rgba(0,0,0,0.06);
+  --shadow-glow: 0 0 24px rgba(37, 99, 235, 0.20);
+}
+
+/* ── Reset ──────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  /* Grain subtil sur le fond */
+  background-image:
+    radial-gradient(ellipse 80% 60% at 20% -10%, rgba(37,99,235,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 85% 110%, rgba(6,182,212,0.04) 0%, transparent 60%);
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { cursor: pointer; font-family: var(--font-body); }
+input, textarea, select { font-family: var(--font-body); }
+
+/* ── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--accent) 0%, var(--accent-cyan) 100%);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ── Container ──────────────────────────────────────────────── */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ── Tag générique ──────────────────────────────────────────── */
+.tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(37,99,235,0.18);
+  color: var(--accent);
+  background: rgba(37,99,235,0.06);
+  transition: all var(--transition);
+}
+
+.tag--accent {
+  background: var(--grad-primary);
+  color: #ffffff;
+  border-color: transparent;
+}
+
+.tag--muted {
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  border-color: var(--border);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   ANIMATIONS GLOBALES
+══════════════════════════════════════════════════════════════ */
+
+/* ── Entrées de page ── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fade-down {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Scale pop ── */
+@keyframes pop-in {
+  0%   { opacity: 0; transform: scale(0.88); }
+  70%  { transform: scale(1.03); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* ── Spin ── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Pulse glow ── */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+  50%       { box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.15); }
+}
+
+/* ── Float ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+/* ── Gradient shift ── */
+@keyframes gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ── Shimmer (skeleton loading) ── */
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position: 600px 0; }
+}
+
+/* ── Bounce dot (loading) ── */
+@keyframes bounce-dot {
+  0%, 80%, 100% { transform: scale(0); opacity: 0.3; }
+  40%            { transform: scale(1); opacity: 1; }
+}
+
+/* ── Underline slide ── */
+@keyframes underline-slide {
+  from { transform: scaleX(0); transform-origin: left; }
+  to   { transform: scaleX(1); transform-origin: left; }
+}
+
+/* ── Stagger helpers (appliqués via style inline ou classes) ── */
+.anim-delay-1 { animation-delay: 0.05s; }
+.anim-delay-2 { animation-delay: 0.10s; }
+.anim-delay-3 { animation-delay: 0.15s; }
+.anim-delay-4 { animation-delay: 0.20s; }
+.anim-delay-5 { animation-delay: 0.25s; }
+
+/* ── Classes utilitaires d'animation ── */
+.animate-fade-up   { animation: fade-up 0.5s ease both; }
+.animate-fade-in   { animation: fade-in 0.4s ease both; }
+.animate-pop-in    { animation: pop-in 0.4s cubic-bezier(0.34,1.56,0.64,1) both; }
+.animate-float     { animation: float 3s ease-in-out infinite; }
+
+/* ── Hover lift (appliqué sur cards etc.) ── */
+.hover-lift {
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ── Liens avec underline animé ── */
+.link-animated {
+  position: relative;
+}
+.link-animated::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -2px;
+  width: 100%; height: 1.5px;
+  background: var(--grad-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition);
+}
+.link-animated:hover::after {
+  transform: scaleX(1);
+}
+
+/* ── Boutons avec gradient animé ── */
+.btn-gradient {
+  background: var(--grad-primary);
+  background-size: 200% 200%;
+  animation: gradient-shift 4s ease infinite;
+  color: #fff;
+  border: none;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.btn-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+/* ── Skeleton loader ── */
+.skeleton {
+  background: linear-gradient(90deg,
+    var(--bg-card) 25%,
+    var(--bg-elevated) 50%,
+    var(--bg-card) 75%
+  );
+  background-size: 600px 100%;
+  animation: shimmer 1.4s infinite linear;
+  border-radius: var(--radius);
+}
+
+/* ── Focus visible (accessibilité) ── */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Selection ── */
+::selection {
+  background: rgba(37, 99, 235, 0.15);
+  color: var(--accent);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   MICRO-INTERACTIONS GLOBALES
+══════════════════════════════════════════════════════════════ */
+
+/* Boutons — ripple effect et lift */
+button:not(:disabled):active {
+  transform: scale(0.97);
+}
+
+/* Cards — animation d'entrée staggerée via nth-child */
+.projet-card,
+.profil-card,
+.sidebar-card,
+.pp-card {
+  animation: fade-up 0.45s ease both;
+}
+
+/* Links dans nav — underline slide */
+.navbar__link {
+  position: relative;
+}
+.navbar__link::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -3px;
+  width: 100%; height: 2px;
+  background: var(--grad-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  border-radius: 1px;
+  transition: transform var(--transition);
+}
+.navbar__link:hover::after,
+.navbar__link.active::after {
+  transform: scaleX(1);
+}
+
+/* Inputs — border glow au focus */
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+/* Tags — hover shimmer */
+.tag:hover {
+  border-color: rgba(37,99,235,0.3);
+  color: var(--accent);
+  background: rgba(37,99,235,0.06);
+}
+
+/* Bouton accent — gradient animé */
+.btn-accent,
+.form-submit,
+.au-btn-save {
+  background: var(--grad-primary);
+  background-size: 200% 200%;
+  animation: gradient-shift 5s ease infinite;
+  border: none;
+  color: #fff;
+  transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+}
+
+.btn-accent:hover:not(:disabled),
+.form-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(37,99,235,0.30);
+  opacity: 1;
+}
+
+/* Spinners — couleur froide */
+.spinner, .btn-spinner {
+  border-top-color: var(--accent);
+}
+
+/* Page transitions — les .detail-page, .profil-page etc. */
+.detail-page > *:not(nav),
+.profil-page > *:not(nav),
+.pp-page > *:not(nav) {
+  animation: fade-up 0.5s ease both;
+}
+
+/* Hero titles — légère animation */
+.detail-hero__title,
+.profil-name,
+.pp-hero__name {
+  animation: fade-up 0.5s ease both;
+}
+
+/* Section titles stagger */
+.detail-section:nth-child(1) { animation-delay: 0.05s; }
+.detail-section:nth-child(2) { animation-delay: 0.10s; }
+.detail-section:nth-child(3) { animation-delay: 0.15s; }
+.detail-section:nth-child(4) { animation-delay: 0.20s; }
+.detail-section:nth-child(5) { animation-delay: 0.25s; }

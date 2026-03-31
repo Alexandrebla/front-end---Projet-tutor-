@@ -1,0 +1,373 @@
+/* ============================================================
+   Navbar.css — thème clair + menu déroulant L'IUT
+   ============================================================ */
+
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+/* ── Logo ─────────────────────────────────────────────── */
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+}
+
+.navbar__logo-mmi {
+  font-size: 1.6rem;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.navbar__logo-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.navbar__logo-sub {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding-top: 2px;
+}
+
+/* ── Liens ────────────────────────────────────────────── */
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navbar__link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.02em;
+  transition: color var(--transition);
+  position: relative;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+
+.navbar__link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width var(--transition);
+}
+
+.navbar__link:hover,
+.navbar__link--active {
+  color: var(--text-primary);
+}
+
+.navbar__link:hover::after,
+.navbar__link--active::after {
+  width: 100%;
+}
+
+/* ── Dropdown ─────────────────────────────────────────── */
+.navbar__dropdown {
+  position: relative;
+}
+
+.navbar__dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Le soulignement ne doit pas couvrir la chevron */
+.navbar__dropdown-toggle::after {
+  width: calc(100% - 20px);
+}
+
+.navbar__chevron {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  transition: transform var(--transition);
+  color: var(--text-muted);
+}
+
+.navbar__dropdown-toggle--open .navbar__chevron {
+  transform: rotate(180deg);
+}
+
+/* Menu */
+.navbar__dropdown-menu {
+  position: absolute;
+  top: calc(100% + 16px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 240px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 8px;
+  animation: dropdown-in 0.18s ease both;
+  z-index: 200;
+}
+
+/* Petite flèche vers le haut */
+.navbar__dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background: #ffffff;
+  border-left: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+  rotate: 45deg;
+}
+
+@keyframes dropdown-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(-6px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.navbar__dropdown-header {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 6px 10px 8px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 4px;
+}
+
+.navbar__dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 10px;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all var(--transition);
+  text-decoration: none;
+}
+
+.navbar__dropdown-item:hover {
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+
+.navbar__dropdown-item--active {
+  background: rgba(179, 204, 0, 0.08);
+  color: var(--text-primary);
+}
+
+.navbar__dropdown-item--soon {
+  opacity: 0.55;
+  cursor: default;
+  pointer-events: none;
+}
+
+.navbar__dropdown-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  background: var(--bg-elevated);
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar__dropdown-label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navbar__soon-badge {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.navbar__dropdown-arrow {
+  width: 14px;
+  height: 14px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity var(--transition), transform var(--transition);
+}
+
+.navbar__dropdown-item:hover .navbar__dropdown-arrow {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+/* ── Actions ──────────────────────────────────────────── */
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.navbar__pseudo {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  transition: color var(--transition);
+}
+
+.navbar__pseudo:hover { color: var(--accent); }
+
+.navbar__btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 20px;
+  background: var(--text-primary);
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: background var(--transition), transform var(--transition);
+}
+
+.navbar__btn:hover {
+  background: var(--accent);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.navbar__btn--ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  padding: 7px 16px;
+}
+
+.navbar__btn--ghost:hover {
+  color: var(--accent-alt);
+  border-color: var(--accent-alt);
+  background: rgba(232, 52, 74, 0.06);
+  transform: none;
+}
+
+/* ── Lien / menu admin ────────────────────────────────── */
+.navbar__admin-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 13px;
+  border-radius: var(--radius);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #d97706;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.28);
+  transition: all var(--transition);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.navbar__admin-link svg:first-child {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.navbar__admin-link:hover,
+.navbar__admin-link--active {
+  background: #f59e0b;
+  color: #fff;
+  border-color: #f59e0b;
+}
+
+.navbar__admin-link--open {
+  background: #f59e0b;
+  color: #fff;
+  border-color: #f59e0b;
+}
+
+/* Menu déroulant aligné à droite (pour admin) */
+.navbar__dropdown--admin {
+  position: relative;
+}
+
+.navbar__dropdown-menu--right {
+  right: 0;
+  left: auto;
+  transform: none;
+  animation: dropdown-in-right 0.18s ease both;
+}
+
+/* Flèche du menu admin : alignée à droite */
+.navbar__dropdown-menu--right::before {
+  left: auto;
+  right: 18px;
+  transform: none;
+}
+
+@keyframes dropdown-in-right {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Chevron animation */
+.navbar__chevron {
+  width: 12px;
+  height: 12px;
+  transition: transform var(--transition);
+}
+
+.navbar__chevron--open {
+  transform: rotate(180deg);
+}
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 640px) {
+  .navbar__links { display: none; }
+}
